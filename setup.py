@@ -54,10 +54,12 @@ setup(
         '': 'source'
     },
     install_requires=[
-        'PySide >= 1.1.1',
-        'clique >= 1.2.0'
+        'PySide >= 1.2.2, < 2',
+        'clique >= 1.2.0, < 2'
     ],
-    tests_require=['pytest >= 2.3.5'],
+    tests_require=[
+        'pytest >= 2.3.5, < 3'
+    ],
     cmdclass={
         'test': PyTest
     }
