@@ -1,5 +1,9 @@
+# Project specific
+source/riffle/resource.py
+
 # General
 *.py[cod]
+Thumbs.db
 
 # Packages
 *.egg
