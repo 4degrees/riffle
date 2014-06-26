@@ -5,8 +5,8 @@
 import os
 from datetime import datetime
 
-from PySide.QtCore import Qt, QAbstractItemModel, QModelIndex, QDir, QFileInfo
-from PySide.QtGui import QIcon, QSortFilterProxyModel
+from PySide.QtCore import Qt, QAbstractItemModel, QModelIndex, QDir
+from PySide.QtGui import QSortFilterProxyModel
 import clique
 
 
