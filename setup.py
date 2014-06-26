@@ -5,11 +5,15 @@
 import os
 import re
 
+from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+
+
+ROOT_PATH = os.path.dirname(
+    os.path.realpath(__file__)
+)
+
+SOURCE_PATH = os.path.join(ROOT_PATH, 'source')
 
 
 class PyTest(TestCommand):
@@ -27,17 +31,17 @@ class PyTest(TestCommand):
         raise SystemExit(errno)
 
 
-with open(os.path.join(
-    os.path.dirname(__file__), 'source', 'riffle', '_version.py'
-)) as _version_file:
-    _version = re.match(
-        r'.*__version__ = \'(.*?)\'', _version_file.read(), re.DOTALL
+with open(os.path.join(SOURCE_PATH, 'riffle', '_version.py')) as _version_file:
+    VERSION = re.match(
+        r'.*__version__ = \'(.*?)\'',
+        _version_file.read(),
+        re.DOTALL
     ).group(1)
 
 
 setup(
     name='Riffle',
-    version=_version,
+    version=VERSION,
     description='Filesystem browser for PySide.',
     long_description=open('README.rst').read(),
     keywords='filesystem, browser, pyside, qt, pyqt',
@@ -45,17 +49,16 @@ setup(
     author='Martin Pengelly-Phillips',
     author_email='martin@4degrees.ltd.uk',
     license='Apache License (2.0)',
-    packages=[
-        'riffle',
-    ],
+    packages=find_packages(SOURCE_PATH),
     package_dir={
         '': 'source'
     },
     install_requires=[
+        'PySide >= 1.1.1',
+        'clique >= 1.2.0'
     ],
     tests_require=['pytest >= 2.3.5'],
     cmdclass={
         'test': PyTest
-    },
-    zip_safe=False
+    }
 )
