@@ -6,7 +6,7 @@ import os
 from datetime import datetime
 
 from PySide.QtCore import Qt, QAbstractItemModel, QModelIndex, QDir, QFileInfo
-from PySide.QtGui import QIcon, QFileIconProvider, QSortFilterProxyModel
+from PySide.QtGui import QIcon, QSortFilterProxyModel
 import clique
 
 
@@ -281,12 +281,18 @@ class Filesystem(QAbstractItemModel):
 
     ITEM_ROLE = Qt.UserRole + 1
 
-    def __init__(self, path='', parent=None):
+    def __init__(self, path='', parent=None, iconFactory=None):
         '''Initialise with root *path*.'''
         super(Filesystem, self).__init__(parent=parent)
         self.root = ItemFactory(path)
         self.columns = ['Name', 'Size', 'Type', 'Date Modified']
-        self.iconFactory = QFileIconProvider()
+
+        if iconFactory is None:
+            # Local import to circumvent circular dependency.
+            import riffle.icon_factory
+            iconFactory = riffle.icon_factory.IconFactory()
+
+        self.iconFactory = iconFactory
 
     def rowCount(self, parent):
         '''Return number of children *parent* index has.'''
@@ -421,19 +427,7 @@ class Filesystem(QAbstractItemModel):
 
         elif role == Qt.DecorationRole:
             if column == 0:
-                icon = self.iconFactory.icon(QFileInfo(item.path))
-
-                if icon is None or icon.isNull():
-                    if isinstance(item, Directory):
-                        icon = QIcon(':riffle/icon/folder')
-                    elif isinstance(item, Mount):
-                        icon = QIcon(':riffle/icon/drive')
-                    elif isinstance(item, Collection):
-                        icon = QIcon(':riffle/icon/collection')
-                    else:
-                        icon = QIcon(':riffle/icon/file')
-
-                return icon
+                return self.iconFactory.icon(item)
 
         elif role == Qt.TextAlignmentRole:
             if column == 1:

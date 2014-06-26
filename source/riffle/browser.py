@@ -8,6 +8,7 @@ from PySide import QtGui, QtCore
 
 import riffle.resource
 import riffle.model
+import riffle.icon_factory
 
 
 class FilesystemBrowser(QtGui.QDialog):
@@ -192,10 +193,9 @@ class FilesystemBrowser(QtGui.QDialog):
             index = model.pathIndex(segment)
             if not index.isValid():
                 # Root item.
-                icon = model.iconFactory.icon(model.iconFactory.Computer)
-                if icon is None:
-                    icon = QtGui.QIcon(':riffle/icon/folder')
-
+                icon = model.iconFactory.icon(
+                    riffle.icon_factory.IconType.Computer
+                )
                 self._locationWidget.addItem(
                     icon, model.root.path or model.root.name, model.root.path
                 )
