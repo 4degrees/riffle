@@ -156,7 +156,7 @@ setup(
     name='Riffle',
     version=VERSION,
     description='Filesystem browser for PySide.',
-    long_description=open('README.rst').read(),
+    long_description=open(README_PATH).read(),
     keywords='filesystem, browser, pyside, qt, pyqt',
     url='https://github.com/4degrees/riffle',
     author='Martin Pengelly-Phillips',
