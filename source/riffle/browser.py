@@ -14,16 +14,20 @@ import riffle.icon_factory
 class FilesystemBrowser(QtGui.QDialog):
     '''FilesystemBrowser dialog.'''
 
-    def __init__(self, root='', parent=None):
+    def __init__(self, root='', parent=None, iconFactory=None):
         '''Initialise browser with *root* path.
 
         Use an empty *root* path to specify the computer.
 
         *parent* is the optional owner of this UI element.
 
+        *iconFactory* specifies the optional factory to pass to the model for
+        customising icons.
+
         '''
         super(FilesystemBrowser, self).__init__(parent=parent)
         self._root = root
+        self._iconFactory = iconFactory
         self._selected = []
         self._construct()
         self._postConstruction()
@@ -61,7 +65,7 @@ class FilesystemBrowser(QtGui.QDialog):
 
         proxy = riffle.model.FilesystemSortProxy(self)
         model = riffle.model.Filesystem(
-            path=self._root, parent=self
+            path=self._root, parent=self, iconFactory=self._iconFactory
         )
         proxy.setSourceModel(model)
         proxy.setDynamicSortFilter(True)
