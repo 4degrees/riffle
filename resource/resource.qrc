@@ -1,0 +1,12 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="riffle/icon/">
+        <file alias="next">icon/arrow_right.png</file>
+        <file alias="previous">icon/arrow_left.png</file>
+        <file alias="up">icon/arrow_up.png</file>
+        <file alias="computer">icon/screen.png</file>
+        <file alias="drive">icon/drive.png</file>
+        <file alias="folder">icon/folder.png</file>
+        <file alias="file">icon/document.png</file>
+        <file alias="collection">icon/collection.png</file>
+    </qresource>
+</RCC>
