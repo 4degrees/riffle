@@ -49,10 +49,6 @@ modindex_common_prefix = ['riffle.']
 
 # -- HTML output --------------------------------------------------------------
 
-# The theme to use for HTML and HTML Help pages.  See the documentation for
-# a list of builtin themes.
-html_theme = 'default'
-
 # If True, copy source rst files to output for reference
 html_copy_source = True
 
