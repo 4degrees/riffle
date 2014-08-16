@@ -43,6 +43,9 @@ class FilesystemBrowser(QtGui.QDialog):
 
         self._upButton = QtGui.QToolButton()
         self._upButton.setIcon(QtGui.QIcon(':riffle/icon/up'))
+        self._upShortcut = QtGui.QShortcut(
+            QtGui.QKeySequence("Backspace"), self
+        )
         self._headerLayout.addWidget(self._upButton)
 
         self.layout().addLayout(self._headerLayout)
@@ -111,6 +114,7 @@ class FilesystemBrowser(QtGui.QDialog):
         )
 
         self._upButton.clicked.connect(self._onNavigateUpButtonClicked)
+        self._upShortcut.activated.connect(self._onNavigateUpButtonClicked)
         self._locationWidget.currentIndexChanged.connect(
             self._onNavigate
         )
@@ -209,8 +213,10 @@ class FilesystemBrowser(QtGui.QDialog):
 
         if self._locationWidget.count() > 1:
             self._upButton.setEnabled(True)
+            self._upShortcut.setEnabled(True)
         else:
             self._upButton.setEnabled(False)
+            self._upShortcut.setEnabled(False)
 
     def selected(self):
         '''Return selected paths.'''
