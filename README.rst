@@ -16,7 +16,7 @@ Issue tracker
 
 Found a bug? Have an idea on how to make the tool better?
 
-Post it at https://github.com/4degrees/riffle/issues
+Post it at https://gitlab.com/4degrees/riffle/issues
 
 *********************
 Copyright and license

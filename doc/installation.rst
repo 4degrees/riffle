@@ -20,15 +20,14 @@ of the mirrors::
     $ pip install --use-mirrors riffle
 
 Alternatively, you may wish to download manually from Github where Riffle
-is `actively developed <https://github.com/4degrees/riffle>`_.
+is `actively developed <https://gitlab.com/4degrees/riffle>`_.
 
 You can clone the public repository::
 
-    $ git clone git://github.com/4degrees/riffle.git
+    $ git clone git@gitlab.com:4degrees/riffle.git
 
 Or download an appropriate
-`tarball <https://github.com/4degrees/riffle/tarball/master>`_ or
-`zipball <https://github.com/4degrees/riffle/zipball/master>`_
+`zipball <https://gitlab.com/4degrees/riffle/repository/archive.zip?ref=master>`_
 
 Once you have a copy of the source, you can install it into your site-packages::
 
@@ -39,7 +38,7 @@ Dependencies
 
 * `Python <http://python.org>`_ >= 2.6, < 3
 * `PySide <http://qt-project.org/wiki/PySide>`_ >= 1.2.2, < 2
-* `Clique <https://github.com/4degrees/clique>`_ >= 1.2.0, < 2
+* `Clique <https://gitlab.com/4degrees/clique>`_ >= 1.2.0, < 2
 
 Additional For testing
 ----------------------

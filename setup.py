@@ -158,7 +158,7 @@ setup(
     description='Filesystem browser for PySide.',
     long_description=open(README_PATH).read(),
     keywords='filesystem, browser, pyside, qt, pyqt',
-    url='https://github.com/4degrees/riffle',
+    url='https://gitlab.com/4degrees/riffle',
     author='Martin Pengelly-Phillips',
     author_email='martin@4degrees.ltd.uk',
     license='Apache License (2.0)',

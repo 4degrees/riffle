@@ -30,7 +30,7 @@ user::
     Selected: [u'C:\\Users\\Martin\\data\\scratch\\ftrack_test.mov']
 
 The browser can also identify sequences of files (using
-`Clique <https://github.com/4degrees/clique>`_). They will be displayed as a
+`Clique <https://gitlab.com/4degrees/clique>`_). They will be displayed as a
 special *collection* item and can be navigated into like a directory to see and
 select individual files.
 
