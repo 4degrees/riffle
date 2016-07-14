@@ -19,7 +19,7 @@ of the mirrors::
 
     $ pip install --use-mirrors riffle
 
-Alternatively, you may wish to download manually from Github where Riffle
+Alternatively, you may wish to download manually from Gitlab where Riffle
 is `actively developed <https://gitlab.com/4degrees/riffle>`_.
 
 You can clone the public repository::
