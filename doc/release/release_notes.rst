@@ -8,6 +8,12 @@
 Release Notes
 *************
 
+.. release:: Upcoming
+
+    .. change:: new
+
+        Added :ref:`release` to documentation.
+
 .. release:: 0.1.0
     :date: 2014-06-26
 
