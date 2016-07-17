@@ -124,7 +124,7 @@ class FilesystemBrowser(QtGui.QDialog):
         item = self._filesystemWidget.model().item(index)
         if not isinstance(item, riffle.model.File):
             self._acceptButton.setDisabled(True)
-            self.setLocation(item.path)
+            self.setLocation(item.path, interactive=True)
 
     def _onSelectItem(self, selection, previousSelection):
         '''Handle selection of item in listing.'''
@@ -136,7 +136,9 @@ class FilesystemBrowser(QtGui.QDialog):
     def _onNavigate(self, index):
         '''Handle selection of path segment.'''
         if index > 0:
-            self.setLocation(self._locationWidget.itemData(index))
+            self.setLocation(
+                self._locationWidget.itemData(index), interactive=True
+            )
 
     def _onNavigateUpButtonClicked(self):
         '''Navigate up a directory on button click.'''
