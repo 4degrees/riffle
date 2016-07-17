@@ -6,8 +6,15 @@
 
 import os
 import re
+import sys
 
 # -- General ------------------------------------------------------------------
+
+# Inject source onto path so that autodoc can find it by default, but in such a
+# way as to allow overriding location.
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'source'))
+)
 
 # Extensions
 extensions = [
@@ -15,6 +22,7 @@ extensions = [
     'sphinx.ext.extlinks',
     'sphinx.ext.intersphinx',
     'sphinx.ext.viewcode',
+    'lowdown'
 ]
 
 # The suffix of source filenames.
@@ -40,14 +48,15 @@ with open(
 version = _version
 release = _version
 
-# The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
-
 # A list of prefixes to ignore for module listings
 modindex_common_prefix = ['riffle.']
 
 
 # -- HTML output --------------------------------------------------------------
+
+html_theme = 'sphinx_rtd_theme'
+
+html_static_path = ['_static']
 
 # If True, copy source rst files to output for reference
 html_copy_source = True

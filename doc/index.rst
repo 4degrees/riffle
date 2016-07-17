@@ -14,6 +14,7 @@ Filesystem browser for PySide.
     installation
     usage
     api_reference/index
+    release/index
     glossary
 
 ******************
