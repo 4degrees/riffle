@@ -152,6 +152,27 @@ with open(os.path.join(SOURCE_PATH, 'riffle', '_version.py')) as _version_file:
     ).group(1)
 
 
+# Compute dependencies.
+SETUP_REQUIRES = [
+    'PySide >= 1.2.2, < 2',
+    'sphinx >= 1.2.2, < 2',
+    'sphinx_rtd_theme >= 0.1.6, < 1',
+    'lowdown >= 0.1.0, < 2'
+]
+INSTALL_REQUIRES = [
+    'PySide >= 1.2.2, < 2',
+    'clique >= 1.2.0, < 2'
+]
+TEST_REQUIRES = [
+    'pytest >= 2.3.5, < 3'
+]
+
+# Readthedocs requires Sphinx extensions to be specified as part of
+# install_requires in order to build properly.
+if os.environ.get('READTHEDOCS', None) == 'True':
+    INSTALL_REQUIRES.extend(SETUP_REQUIRES)
+
+
 setup(
     name='Riffle',
     version=VERSION,
@@ -166,16 +187,14 @@ setup(
     package_dir={
         '': 'source'
     },
-    setup_requires=[
-        'PySide >= 1.2.2, < 2'
-    ],
-    install_requires=[
-        'PySide >= 1.2.2, < 2',
-        'clique >= 1.2.0, < 2'
-    ],
-    tests_require=[
-        'pytest >= 2.3.5, < 3'
-    ],
+    setup_requires=SETUP_REQUIRES,
+    install_requires=INSTALL_REQUIRES,
+    tests_require=TEST_REQUIRES,
+    extras_require={
+        'setup': SETUP_REQUIRES,
+        'tests': TEST_REQUIRES,
+        'dev': SETUP_REQUIRES + TEST_REQUIRES
+    },
     cmdclass={
         'build': Build,
         'build_resources': BuildResources,
