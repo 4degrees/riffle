@@ -33,6 +33,8 @@ RESOURCE_TARGET_PATH = os.path.join(
 
 README_PATH = os.path.join(ROOT_PATH, 'README.rst')
 
+ON_READ_THE_DOCS = os.environ.get('READTHEDOCS', None) == 'True'
+
 
 # Custom commands.
 class BuildResources(Command):
@@ -50,6 +52,10 @@ class BuildResources(Command):
 
     def run(self):
         '''Run build.'''
+        if ON_READ_THE_DOCS:
+            # PySide not available.
+            return
+
         try:
             pyside_rcc_command = 'pyside-rcc'
 
@@ -169,9 +175,19 @@ TEST_REQUIRES = [
 
 # Readthedocs requires Sphinx extensions to be specified as part of
 # install_requires in order to build properly.
-if os.environ.get('READTHEDOCS', None) == 'True':
+if ON_READ_THE_DOCS:
     INSTALL_REQUIRES.extend(SETUP_REQUIRES)
 
+    # PySide not available.
+    SETUP_REQUIRES = [
+        requirement for requirement in SETUP_REQUIRES
+        if not requirement.startswith("PySide ")
+    ]
+
+    INSTALL_REQUIRES = [
+        requirement for requirement in INSTALL_REQUIRES
+        if not requirement.startswith("PySide ")
+    ]
 
 setup(
     name='Riffle',
