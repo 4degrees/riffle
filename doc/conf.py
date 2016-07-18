@@ -8,6 +8,8 @@ import os
 import re
 import sys
 
+import mock
+
 # -- General ------------------------------------------------------------------
 
 # Inject source onto path so that autodoc can find it by default, but in such a
@@ -15,6 +17,27 @@ import sys
 sys.path.append(
     os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'source'))
 )
+
+# Mock unavailable modules and references.
+mock_qt_gui = mock.MagicMock(
+    QDialog=type('QDialog', (object,), {'__module__': 'PySide.QtGui'}),
+    QSortFilterProxyModel=type(
+        'QSortFilterProxyModel', (object,), {'__module__': 'PySide.QtGui'}
+    )
+)
+mock_qt_core = mock.MagicMock(
+    QAbstractItemModel=type(
+        'QAbstractItemModel', (object,), {'__module__': 'PySide.QtCore'}
+    )
+)
+
+sys.modules.update({
+    'PySide': mock.MagicMock(QtGui=mock_qt_gui, QtCore=mock_qt_core),
+    'PySide.QtGui': mock_qt_gui,
+    'PySide.QtCore': mock_qt_core,
+    'riffle.resource': mock.MagicMock()
+})
+
 
 # Extensions
 extensions = [
