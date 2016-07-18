@@ -8,7 +8,8 @@
 Release Notes
 *************
 
-.. release:: Upcoming
+.. release:: 0.2.0
+    :date: 2016-07-18
 
     .. change:: fixed
         :tags: interface
