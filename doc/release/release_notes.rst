@@ -8,6 +8,13 @@
 Release Notes
 *************
 
+.. release:: Upcoming
+
+    .. change:: fixed
+        :tags: documentation
+
+        Documentation fails to build on Read the Docs due to PySide dependency.
+
 .. release:: 0.2.0
     :date: 2016-07-18
 
