@@ -557,3 +557,30 @@ class FilesystemSortProxy(QSortFilterProxyModel):
             return None
 
         return sourceModel.icon(self.mapToSource(index))
+
+    def hasChildren(self, index):
+        '''Return if *index* has children.'''
+        sourceModel = self.sourceModel()
+
+        if not sourceModel:
+            return False
+
+        return sourceModel.hasChildren(self.mapToSource(index))
+
+    def canFetchMore(self, index):
+        '''Return if more data available for *index*.'''
+        sourceModel = self.sourceModel()
+
+        if not sourceModel:
+            return False
+
+        return sourceModel.canFetchMore(self.mapToSource(index))
+
+    def fetchMore(self, index):
+        '''Fetch additional data under *index*.'''
+        sourceModel = self.sourceModel()
+
+        if not sourceModel:
+            return False
+
+        return sourceModel.fetchMore(self.mapToSource(index))

@@ -124,7 +124,7 @@ class FilesystemBrowser(QtGui.QDialog):
         item = self._filesystemWidget.model().item(index)
         if not isinstance(item, riffle.model.File):
             self._acceptButton.setDisabled(True)
-            self.setLocation(item.path)
+            self.setLocation(item.path, interactive=True)
 
     def _onSelectItem(self, selection, previousSelection):
         '''Handle selection of item in listing.'''
@@ -136,7 +136,9 @@ class FilesystemBrowser(QtGui.QDialog):
     def _onNavigate(self, index):
         '''Handle selection of path segment.'''
         if index > 0:
-            self.setLocation(self._locationWidget.itemData(index))
+            self.setLocation(
+                self._locationWidget.itemData(index), interactive=True
+            )
 
     def _onNavigateUpButtonClicked(self):
         '''Navigate up a directory on button click.'''
@@ -167,15 +169,46 @@ class FilesystemBrowser(QtGui.QDialog):
         parts.append(model.root.path)
         return parts
 
-    def setLocation(self, path):
+    def setLocation(self, path, interactive=False):
         '''Set current location to *path*.
 
         *path* must be the same as root or under the root.
 
         .. note::
 
-            Comparisons are case-sensitive. If you set the root as 'D:\' then
-            location can be set as 'D:\folder' *not* 'd:\folder'.
+            Comparisons are case-sensitive. If you set the root as 'D:/' then
+            location can be set as 'D:/folder' *not* 'd:/folder'.
+
+        If *interactive* is True, catch any exception occurring and display an
+        appropriate warning dialog to the user. Otherwise allow exceptions to
+        bubble up as normal.
+
+        '''
+        try:
+            self._setLocation(path)
+        except Exception as error:
+            if not interactive:
+                raise
+            else:
+                warning_dialog = QtGui.QMessageBox(
+                    QtGui.QMessageBox.Warning,
+                    'Location is not available',
+                    '{0} is not accessible.'.format(path),
+                    QtGui.QMessageBox.Ok,
+                    self
+                )
+                warning_dialog.setDetailedText(str(error))
+                warning_dialog.exec_()
+
+    def _setLocation(self, path):
+        '''Set current location to *path*.
+
+        *path* must be the same as root or under the root.
+
+        .. note::
+
+            Comparisons are case-sensitive. If you set the root as 'D:/' then
+            location can be set as 'D:/folder' *not* 'd:/folder'.
 
         '''
         model = self._filesystemWidget.model()

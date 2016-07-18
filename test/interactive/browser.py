@@ -17,12 +17,13 @@ def main(arguments=None):
     application = QtGui.QApplication(arguments)
 
     browser = riffle.browser.FilesystemBrowser()
-    browser.setMinimumSize(600, 300)
+
+    screen_size = application.desktop().availableGeometry()
+    browser.setMinimumSize(screen_size.width() / 2, screen_size.height() / 2)
+
     if browser.exec_():
         selected = browser.selected()
         print('Selected: {0}'.format(selected))
-
-    sys.exit(application.exec_())
 
 
 if __name__ == '__main__':
