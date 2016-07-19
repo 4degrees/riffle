@@ -124,7 +124,7 @@ class FilesystemBrowser(QtGui.QDialog):
     def _configureShortcuts(self):
         '''Add keyboard shortcuts to navigate the filesystem.'''
         self._upShortcut = QtGui.QShortcut(
-            QtGui.QKeySequence("Backspace"), self
+            QtGui.QKeySequence('Backspace'), self
         )
         self._upShortcut.setAutoRepeat(False)
         self._upShortcut.activated.connect(self._onNavigateUpButtonClicked)
