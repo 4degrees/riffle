@@ -8,6 +8,13 @@
 Release Notes
 *************
 
+.. release:: Upcoming
+
+    .. change:: new
+        :tags: interface
+
+        :kbd:`Backspace` key now navigates up a level in the browser.
+
 .. release:: 0.2.1
     :date: 2016-07-19
 
