@@ -8,7 +8,8 @@
 Release Notes
 *************
 
-.. release:: Upcoming
+.. release:: 0.2.1
+    :date: 2016-07-19
 
     .. change:: fixed
         :tags: documentation
