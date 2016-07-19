@@ -101,6 +101,8 @@ class FilesystemBrowser(QtGui.QDialog):
         self._acceptButton.clicked.connect(self.accept)
         self._cancelButton.clicked.connect(self.reject)
 
+        self._configureShortcuts()
+
         self.setLocation(self._root)
 
         self._filesystemWidget.horizontalHeader().setResizeMode(
@@ -118,6 +120,14 @@ class FilesystemBrowser(QtGui.QDialog):
         self._filesystemWidget.activated.connect(self._onActivateItem)
         selectionModel = self._filesystemWidget.selectionModel()
         selectionModel.currentRowChanged.connect(self._onSelectItem)
+
+    def _configureShortcuts(self):
+        '''Add keyboard shortcuts to navigate the filesystem.'''
+        self._upShortcut = QtGui.QShortcut(
+            QtGui.QKeySequence("Backspace"), self
+        )
+        self._upShortcut.setAutoRepeat(False)
+        self._upShortcut.activated.connect(self._onNavigateUpButtonClicked)
 
     def _onActivateItem(self, index):
         '''Handle activation of item in listing.'''
@@ -242,8 +252,10 @@ class FilesystemBrowser(QtGui.QDialog):
 
         if self._locationWidget.count() > 1:
             self._upButton.setEnabled(True)
+            self._upShortcut.setEnabled(True)
         else:
             self._upButton.setEnabled(False)
+            self._upShortcut.setEnabled(False)
 
     def selected(self):
         '''Return selected paths.'''
